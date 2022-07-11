@@ -1,0 +1,35 @@
+<%= form_with url: search_url, method: :get do |form| %>
+
+  <div>
+    <%= form.label 'Minimun beds', style: "display: block" %>
+    <%= form.number_field :min_beds %>
+  </div>
+
+  <div>
+    <%= form.label 'Maximum beds', style: "display: block" %>
+    <%= form.number_field :max_beds %>
+  </div>
+
+  <div>
+    <%= form.label 'Minimum baths', style: "display: block" %>
+    <%= form.number_field :min_baths %>
+  </div>
+
+  <div>
+    <%= form.label 'Maximum baths', style: "display: block" %>
+    <%= form.number_field :max_baths %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<ul>
+  <% @listings.each do |listing| %>
+    <%= render listing %>
+    <p>
+      <%= link_to "Show this listing", listing %>
+    </p>
+  <% end %>
+</ul>
