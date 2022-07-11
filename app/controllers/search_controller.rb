@@ -3,7 +3,13 @@ class SearchController < ApplicationController
     if params[:min_beds].nil? && params[:min_baths].nil?
       @listings = []
     else
-      @listings = Listing.where(:beds.gte => params[:min_beds]).and(:beds.lte => params[:max_beds]).and(:baths.gte => params[:min_baths]).and(:baths.lte => params[:max_baths])
+      @listings = Listing.search(search_params)
     end
+  end
+
+  private
+
+  def search_params
+    params.permit(:min_beds, :max_beds, :min_baths, :max_baths)
   end
 end
