@@ -3,7 +3,23 @@ class SearchController < ApplicationController
     if params[:min_beds].nil? && params[:min_baths].nil?
       @listings = []
     else
-      @listings = Listing.search(search_params)
+      @listings = Listing.search(
+      index: "beds",
+        body: {
+          query: {
+            range: {
+                beds: {
+                    gte: search_params[:min_beds],
+                    lte: search_params[:max_beds]
+                },
+                baths: {
+                    gte: search_params[:min_baths],
+                      lte: search_params[:max_baths]
+                }
+            }
+          }
+        }
+      )
     end
   end
 
